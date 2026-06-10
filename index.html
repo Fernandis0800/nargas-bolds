@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InstaClone</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- 1. TELA DE AUTENTICAÇÃO (LOGIN / CADASTRO) -->
+    <div id="auth-screen" class="screen">
+        <div class="box">
+            <h1>InstaClone</h1>
+            <input type="email" id="email" placeholder="E-mail" required>
+            <input type="password" id="password" placeholder="Senha" required>
+            <button id="btn-login">Entrar</button>
+            <button id="btn-register" class="secondary">Criar Conta</button>
+        </div>
+    </div>
+
+    <!-- 2. APP PRINCIPAL (FEED E NAVEGAÇÃO) -->
+    <div id="app-screen" class="screen hidden">
+        <nav class="navbar">
+            <h2 onclick="showSection('feed')">InstaClone</h2>
+            <div class="nav-icons">
+                <button onclick="showSection('feed')">🏠</button>
+                <button onclick="showSection('post')">➕</button>
+                <button onclick="showSection('profile')">👤</button>
+            </div>
+        </nav>
+
+        <!-- SEÇÃO: FEED DE POSTAGENS -->
+        <section id="feed-section" class="app-section">
+            <div id="feed-container">
+                <!-- As postagens dos amigos vão aparecer aqui via JavaScript -->
+            </div>
+        </section>
+
+        <!-- SEÇÃO: NOVA POSTAGEM -->
+        <section id="post-section" class="app-section hidden">
+            <div class="box">
+                <h3>Nova Postagem</h3>
+                <input type="file" id="post-file" accept="image/*">
+                <textarea id="post-caption" placeholder="Escreva uma legenda..."></textarea>
+                <button id="btn-share">Compartilhar</button>
+            </div>
+        </section>
+
+        <!-- SEÇÃO: PERFIL E CONFIGURAÇÕES -->
+        <section id="profile-section" class="app-section hidden">
+            <div class="profile-header">
+                <div class="avatar-container">
+                    <img id="profile-avatar" src="https://placeholder.com" alt="Foto de Perfil">
+                    <input type="file" id="update-avatar-file" accept="image/*">
+                </div>
+                <h2 id="profile-name">Nome do Usuário</h2>
+            </div>
+            
+            <div class="profile-settings">
+                <h3>Configurações do Perfil</h3>
+                <input type="text" id="edit-username" placeholder="Mudar nome de usuário">
+                <button id="btn-save-profile">Salvar Alterações</button>
+                <hr>
+                <div class="toggle-container">
+                    <label for="dark-mode-toggle">🕶️ Fundo Preto (Modo Escuro)</label>
+                    <input type="checkbox" id="dark-mode-toggle">
+                </div>
+                <button id="btn-logout" class="danger">Sair da Conta</button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Firebase SDK (Configuração do Banco de Dados) -->
+    <script src="https://gstatic.com"></script>
+    <script src="https://gstatic.com"></script>
+    <script src="https://gstatic.com"></script>
+    <script src="app.js"></script>
+</body>
+</html>
