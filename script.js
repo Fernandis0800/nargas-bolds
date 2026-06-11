@@ -1,8 +1,6 @@
-// 1. LINKS CORRIGIDOS DO FIREBASE (Antes estavam apontando para gstatic.com puro e quebravam)
 import { initializeApp } from "https://gstatic.com";
 import { getFirestore, collection, addDoc, onSnapshot, query, orderBy } from "https://gstatic.com";
 
-// 2. CONFIGURAÇÃO CORRIGIDA (Adicionado o authDomain correto que estava sem o início)
 const firebaseConfig = {
   apiKey: "AIzaSyD1pHGbTQ2_g6BsOUISFqBcs_rIcDvzjTg",
   authDomain: "nargas-social.firebaseapp.com",
@@ -24,32 +22,41 @@ const sections = {
   profile: document.getElementById("profile-section")
 };
 
-// 3. ADICIONADO WINDOW. PARA FAZER OS BOTÕES DO MENU (🏠 ➕ 👤) VOLTAREM A FUNCIONAR
+// Força a exibição inicial correta das telas principais via estilo direto
+authScreen.style.display = "block";
+appScreen.style.display = "none";
+
 window.showSection = function(sectionName) {
-  Object.values(sections).forEach(sec => sec.classList.add("hidden"));
-  sections[sectionName].classList.remove("hidden");
+  // Esconde todas as seções internas do app
+  Object.values(sections).forEach(sec => {
+    if (sec) sec.style.display = "none";
+  });
+  // Mostra apenas a seção clicada
+  if (sections[sectionName]) sections[sectionName].style.display = "block";
 }
 
-// Navegação interna
+// Cliques do menu de navegação superior (🏠 ➕ 👤)
 document.getElementById("nav-logo").addEventListener("click", () => showSection("feed"));
 document.getElementById("nav-feed").addEventListener("click", () => showSection("feed"));
 document.getElementById("nav-post").addEventListener("click", () => showSection("post"));
 document.getElementById("nav-profile").addEventListener("click", () => showSection("profile"));
 
-// Login Simples Provisório
+// Força a troca de telas ao entrar ou sair da conta (Ignora as classes do CSS)
 document.getElementById("btn-login").addEventListener("click", () => {
-  authScreen.classList.add("hidden");
-  appScreen.classList.remove("hidden");
+  authScreen.style.display = "none";
+  appScreen.style.display = "block";
   showSection("feed");
 });
+
 document.getElementById("btn-register").addEventListener("click", () => {
-  authScreen.classList.add("hidden");
-  appScreen.classList.remove("hidden");
+  authScreen.style.display = "none";
+  appScreen.style.display = "block";
   showSection("feed");
 });
+
 document.getElementById("btn-logout").addEventListener("click", () => {
-  appScreen.classList.add("hidden");
-  authScreen.classList.remove("hidden");
+  appScreen.style.display = "none";
+  authScreen.style.display = "block";
 });
 
 // --- SISTEMA DE POSTAGENS ---
@@ -73,7 +80,7 @@ btnShare.addEventListener("click", async () => {
   }
 });
 
-// Atualização automática do Feed em tempo real
+// Carregar posts automaticamente na tela
 const q = query(collection(db, "posts"), orderBy("criadoEm", "desc"));
 onSnapshot(q, (snapshot) => {
   feedContainer.innerHTML = ""; 
