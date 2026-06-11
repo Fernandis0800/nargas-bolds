@@ -22,7 +22,7 @@
     <!-- 2. APP PRINCIPAL (FEED E NAVEGAÇÃO) -->
     <div id="app-screen" class="screen hidden">
         <nav class="navbar">
-            <h2 id="nav-logo">InstaClone</h2>
+            <h2 id="nav-logo" style="cursor: pointer;">InstaClone</h2>
             <div class="nav-icons">
                 <button id="nav-feed">🏠</button>
                 <button id="nav-post">➕</button>
@@ -33,7 +33,7 @@
         <!-- SEÇÃO: FEED DE POSTAGENS -->
         <section id="feed-section" class="app-section">
             <div id="feed-container">
-                <!-- As postagens dos amigos vão aparecer aqui via JavaScript -->
+                <!-- As postagens vão aparecer aqui via Firebase -->
             </div>
         </section>
 
@@ -57,9 +57,7 @@
         </section>
     </div>
 
-    <!-- Link único e correto para o JavaScript integrado com o Firebase -->
-    <script type="module" src="script.js"></script>
+    <!-- Link correto para o arquivo de script -->
+    <script type="module" src="./script.js"></script>
 </body>
 </html>
-import { initializeApp } from "https://gstatic.com";
-import { getFirestore, collection, addDoc, onSnapshot, query, orderBy } from "https://gstatic.com";
