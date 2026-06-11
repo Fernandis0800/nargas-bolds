@@ -1,7 +1,7 @@
 import { initializeApp } from "https://gstatic.com";
 import { getFirestore, collection, addDoc, onSnapshot, query, orderBy } from "https://gstatic.com";
 
-// Credenciais oficiais do seu projeto nargas-social
+// Credenciais oficiais do seu projeto
 const firebaseConfig = {
   apiKey: "AIzaSyD1pHGbTQ2_g6BsOUISFqBcs_rIcDvzjTg",
   authDomain: "://firebaseapp.com",
@@ -14,7 +14,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// --- CONTROLE DE TELAS E NAVEGAÇÃO ---
+// --- CONTROLE DE TELAS ---
 const authScreen = document.getElementById("auth-screen");
 const appScreen = document.getElementById("app-screen");
 const sections = {
@@ -28,13 +28,13 @@ function showSection(sectionName) {
   sections[sectionName].classList.remove("hidden");
 }
 
-// Eventos dos botões do menu de navegação
+// Navegação
 document.getElementById("nav-logo").addEventListener("click", () => showSection("feed"));
 document.getElementById("nav-feed").addEventListener("click", () => showSection("feed"));
 document.getElementById("nav-post").addEventListener("click", () => showSection("post"));
 document.getElementById("nav-profile").addEventListener("click", () => showSection("profile"));
 
-// Sistema provisório de Login Simples para pular a tela inicial
+// Login Simples Provisório
 document.getElementById("btn-login").addEventListener("click", () => {
   authScreen.classList.add("hidden");
   appScreen.classList.remove("hidden");
@@ -50,12 +50,11 @@ document.getElementById("btn-logout").addEventListener("click", () => {
   authScreen.classList.remove("hidden");
 });
 
-// --- SISTEMA DE POSTAGENS (FIREBASE) ---
+// --- SISTEMA DE POSTAGENS ---
 const postCaption = document.getElementById("post-caption");
 const btnShare = document.getElementById("btn-share");
 const feedContainer = document.getElementById("feed-container");
 
-// Enviar postagem para a nuvem
 btnShare.addEventListener("click", async () => {
   const texto = postCaption.value.trim();
   if (texto === "") return alert("Escreva uma legenda antes de compartilhar!");
@@ -65,30 +64,26 @@ btnShare.addEventListener("click", async () => {
       legenda: texto,
       criadoEm: new Date()
     });
-    postCaption.value = ""; // Limpa o campo
-    showSection("feed");   // Volta para o feed automaticamente
+    postCaption.value = ""; 
+    showSection("feed");   
   } catch (erro) {
     console.error("Erro ao postar:", erro);
   }
 });
 
-// Carregar postagens em tempo real no feed
+// Atualização automática do Feed em tempo real
 const q = query(collection(db, "posts"), orderBy("criadoEm", "desc"));
 onSnapshot(q, (snapshot) => {
-  feedContainer.innerHTML = ""; // Limpa a tela antes de recarregar
-
+  feedContainer.innerHTML = ""; 
   snapshot.forEach((doc) => {
     const dados = doc.data();
-    
-    // Monta o card do post na tela
     const postBox = document.createElement("div");
-    postBox.className = "box post-card"; 
     postBox.style.border = "1px solid #dbdbdb";
     postBox.style.margin = "15px 0";
     postBox.style.padding = "15px";
     postBox.style.background = "#fff";
-    postBox.innerHTML = `<p style="margin:0; font-size:16px;">${dados.legenda}</p>`;
-    
+    postBox.style.borderRadius = "8px";
+    postBox.innerHTML = `<p style="margin:0; font-size:16px; color:#000;">${dados.legenda}</p>`;
     feedContainer.appendChild(postBox);
   });
 });
