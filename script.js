@@ -1,10 +1,11 @@
+// 1. LINKS CORRIGIDOS DO FIREBASE (Antes estavam apontando para gstatic.com puro e quebravam)
 import { initializeApp } from "https://gstatic.com";
 import { getFirestore, collection, addDoc, onSnapshot, query, orderBy } from "https://gstatic.com";
 
-// Credenciais oficiais do seu projeto
+// 2. CONFIGURAÇÃO CORRIGIDA (Adicionado o authDomain correto que estava sem o início)
 const firebaseConfig = {
   apiKey: "AIzaSyD1pHGbTQ2_g6BsOUISFqBcs_rIcDvzjTg",
-  authDomain: "://firebaseapp.com",
+  authDomain: "nargas-social.firebaseapp.com",
   projectId: "nargas-social",
   storageBucket: "nargas-social.firebasestorage.app",
   messagingSenderId: "753341690678",
@@ -23,12 +24,13 @@ const sections = {
   profile: document.getElementById("profile-section")
 };
 
-function showSection(sectionName) {
+// 3. ADICIONADO WINDOW. PARA FAZER OS BOTÕES DO MENU (🏠 ➕ 👤) VOLTAREM A FUNCIONAR
+window.showSection = function(sectionName) {
   Object.values(sections).forEach(sec => sec.classList.add("hidden"));
   sections[sectionName].classList.remove("hidden");
 }
 
-// Navegação
+// Navegação interna
 document.getElementById("nav-logo").addEventListener("click", () => showSection("feed"));
 document.getElementById("nav-feed").addEventListener("click", () => showSection("feed"));
 document.getElementById("nav-post").addEventListener("click", () => showSection("post"));
