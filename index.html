@@ -22,11 +22,11 @@
     <!-- 2. APP PRINCIPAL (FEED E NAVEGAÇÃO) -->
     <div id="app-screen" class="screen hidden">
         <nav class="navbar">
-            <h2 onclick="showSection('feed')">InstaClone</h2>
+            <h2 id="nav-logo">InstaClone</h2>
             <div class="nav-icons">
-                <button onclick="showSection('feed')">🏠</button>
-                <button onclick="showSection('post')">➕</button>
-                <button onclick="showSection('profile')">👤</button>
+                <button id="nav-feed">🏠</button>
+                <button id="nav-post">➕</button>
+                <button id="nav-profile">👤</button>
             </div>
         </nav>
 
@@ -41,7 +41,6 @@
         <section id="post-section" class="app-section hidden">
             <div class="box">
                 <h3>Nova Postagem</h3>
-                <input type="file" id="post-file" accept="image/*">
                 <textarea id="post-caption" placeholder="Escreva uma legenda..."></textarea>
                 <button id="btn-share">Compartilhar</button>
             </div>
@@ -50,32 +49,15 @@
         <!-- SEÇÃO: PERFIL E CONFIGURAÇÕES -->
         <section id="profile-section" class="app-section hidden">
             <div class="profile-header">
-                <div class="avatar-container">
-                    <img id="profile-avatar" src="https://placeholder.com" alt="Foto de Perfil">
-                    <input type="file" id="update-avatar-file" accept="image/*">
-                </div>
                 <h2 id="profile-name">Nome do Usuário</h2>
             </div>
-            
             <div class="profile-settings">
-                <h3>Configurações do Perfil</h3>
-                <input type="text" id="edit-username" placeholder="Mudar nome de usuário">
-                <button id="btn-save-profile">Salvar Alterações</button>
-                <hr>
-                <div class="toggle-container">
-                    <label for="dark-mode-toggle">🕶️ Fundo Preto (Modo Escuro)</label>
-                    <input type="checkbox" id="dark-mode-toggle">
-                </div>
                 <button id="btn-logout" class="danger">Sair da Conta</button>
             </div>
         </section>
     </div>
 
-    <!-- Firebase SDK (Configuração do Banco de Dados) -->
-    <script src="https://gstatic.com"></script>
-    <script src="https://gstatic.com"></script>
-    <script src="https://gstatic.com"></script>
-    <script src="app.js"></script>
+    <!-- Link único e correto para o JavaScript integrado com o Firebase -->
+    <script type="module" src="script.js"></script>
 </body>
 </html>
-<script type="module" src="script.js"></script>
